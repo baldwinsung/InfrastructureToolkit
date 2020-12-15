@@ -1,4 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+#
+# monitor hosts based on dns
 
 import socket, string, os, re
 import dns.query, dns.zone, dns.resolver

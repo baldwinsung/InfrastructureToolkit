@@ -1,7 +1,6 @@
-#!/opt/epd/current/bin/python
+#!/usr/bin/env python
 
 import ldap, re, sys, string, Sybase, socket, os, syslog, xmlrpclib, re
-
 
 #if len(sys.argv) != 2:
 #        print "Usage: $0 <hostname>"

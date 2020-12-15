@@ -1,6 +1,14 @@
-#!/opt/epd/current/bin/python
+#!/usr/bin/env python
+#
+# python2 requires pythondns 1.16
+# pip install dnspython==1.16
+#
+# useful for querying multiple active directory servers also functioning as dns servers
 
-import socket, dns.query, dns.zone, dns.resolver
+import socket
+import dns.query 
+import dns.zone
+import dns.resolver
 
 # Basic query
 #for rdata in dns.resolver.query('www.yahoo.com', 'CNAME') :

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import xmlrpclib, re
  
 SATELLITE_URL      = "http://SAT-SERVER.BLAH.COM/rpc/api"

@@ -1,4 +1,4 @@
-#!/opt/epd/current/bin/python
+#!/usr/bin/env python
 
 import ldap, re, sys, string, Sybase, socket, os, syslog
 
