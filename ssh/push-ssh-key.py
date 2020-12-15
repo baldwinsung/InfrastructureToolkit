@@ -6,7 +6,7 @@ from pexpect import pxssh
 import pexpect 
 import getpass
 
-key_pub = "ssh-xxx xxx xxx@xxx.xxx.io"
+key_pub = ""
 
 try:
     s = pxssh.pxssh()
@@ -15,6 +15,9 @@ try:
     hostname = raw_input('hostname: ')
     username = raw_input('username: ')
     password = getpass.getpass('password: ')
+
+
+    print "Connecting to " +hostname+ "..." 
     s.login(hostname, username, password)
 
     # mkdir and chmod .ssh directory
@@ -26,7 +29,12 @@ try:
         chmod_dotssh_cmd = ( "chmod 700 /home/"+username+"/.ssh" )
 
     s.sendline( mkdir_dotssh_cmd )
+    s.prompt()
+    print(s.before)
+
     s.sendline( chmod_dotssh_cmd )
+    s.prompt()
+    print(s.before)
 
     # create authorized_keys file with public key
     # chmod authorized_keys file
@@ -38,24 +46,24 @@ try:
         chmod_authkey_cmd = ( "chmod 644 /home/"+username+"/.ssh/authorized_keys" )
     
     s.sendline( create_authkey_cmd )
+    s.prompt()
+    print(s.before)
+
     s.sendline( chmod_authkey_cmd )
-
-    if username is 'root':
-        s.sendline( 'ls -ltrah /root/.ssh/authorized_keys' )
-    else:
-        s.sendline( 'ls -ltrah /home/'+username+'/.ssh/authorized_keys' )
-
-    print(s.before)
     s.prompt()
+    print(s.before)
 
+    # cat authorize_keys files
     if username is 'root' :
-        s.sendline( 'cat /root/.ssh/authorized_keys' )
+        cat_authkey_cmd = ( "cat /root/.ssh/authorized_keys" )
     else:
-        s.sendline( 'cat /home/'+username+'/.ssh/authorized_keys' )
+        cat_authkey_cmd = ( "cat /home/"+username+"/.ssh/authorized_keys" )
 
-    print(s.before)
+    s.sendline( cat_authkey_cmd )
     s.prompt()
     print(s.before)
+   
+    # logout 
     s.logout()
 
 except pxssh.ExceptionPxssh as e:
